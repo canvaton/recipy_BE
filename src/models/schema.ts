@@ -1,23 +1,15 @@
-import {
-	text,
-	timestamp,
-	pgTable,
-	uuid,
-	integer,
-	numeric,
-} from "drizzle-orm/pg-core";
+import { text, pgTable, uuid, integer, numeric } from "drizzle-orm/pg-core";
 
 // * MAIN TABLES
-
 export const user = pgTable("user", {
-	id: uuid("id").primaryKey(),
+	id: uuid("id").primaryKey().defaultRandom(),
 	username: text("username").notNull(),
 	nickname: text("nickname"),
-	pfp: text("pfp")
+	pfp: text("pfp"),
 });
 
 export const recipe = pgTable("recipe", {
-	id: uuid("id").primaryKey(),
+	id: uuid("id").primaryKey().defaultRandom(),
 	description: text("description").notNull(),
 	diet: text("diet"),
 	servings: integer("servings"),
@@ -26,27 +18,26 @@ export const recipe = pgTable("recipe", {
 });
 
 export const group = pgTable("group", {
-	id: uuid("id").primaryKey(),
+	id: uuid("id").primaryKey().defaultRandom(),
 	name: text("name").notNull(),
 	image: text("image"),
 	description: text("description"),
 });
 
 // * RELATIONAL TABLES
-
 export const groupMembers = pgTable("groupMembers", {
-	id: uuid("id").primaryKey(),
+	id: uuid("id").primaryKey().defaultRandom(),
 	userId: uuid("userId")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),
 	groupId: uuid("groupId")
 		.notNull()
 		.references(() => group.id, { onDelete: "cascade" }),
-	role: text('role').notNull()
+	role: text("role").notNull(),
 });
 
 export const userRecipes = pgTable("userRecipes", {
-	id: uuid("id").primaryKey(),
+	id: uuid("id").primaryKey().defaultRandom(),
 	recipeId: uuid("recipeId")
 		.notNull()
 		.references(() => recipe.id, { onDelete: "cascade" }),
@@ -55,7 +46,7 @@ export const userRecipes = pgTable("userRecipes", {
 });
 
 export const recipeAllergies = pgTable("recipeAllergies", {
-	id: uuid("id").primaryKey(),
+	id: uuid("id").primaryKey().defaultRandom(),
 	recipeId: uuid("recipeId")
 		.notNull()
 		.references(() => recipe.id, { onDelete: "cascade" }),
