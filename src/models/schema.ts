@@ -13,14 +13,12 @@ export const user = pgTable("user", {
 	id: uuid("id").primaryKey(),
 	username: text("username").notNull(),
 	nickname: text("nickname"),
-	pfp: text("pfp"),
-	createdAt: timestamp("created_at"),
-	updatedAt: timestamp("updated_at"),
+	pfp: text("pfp")
 });
 
 export const recipe = pgTable("recipe", {
 	id: uuid("id").primaryKey(),
-	recipe: text("recipe").notNull(),
+	description: text("description").notNull(),
 	diet: text("diet"),
 	servings: integer("servings"),
 	calories: numeric("calories"),
