@@ -4,9 +4,8 @@ import type { UserType } from "../types";
 import { eq } from "drizzle-orm";
 
 class UserMethods {
-  async insertUser(username: string) : Promise<UserType> {
+  async addUser(username: string) : Promise<UserType> {
 		try {
-			console.log('yo')
 			const createdUser = await db
 				.insert(user)
 				.values({
