@@ -20,7 +20,7 @@ server.get("/api", (req, res) => {
 
 // ! Auth Middleware here
 server.use("/api/user", userRouter);
-server.use("api/recipe", recipeRouter);
+server.use("/api/recipe", recipeRouter);
 
 // Set pool
 const pool = new Pool({

@@ -27,9 +27,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx tsx --env-file=.env --watch src/server.ts ",
     "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate"
+    "migrate": "drizzle-kit migrate",
+    "lint": "npx @biomejs/biome lint --write && npx @biomejs/biome format --write && npx @biomejs/biome check --write",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "engines": {
+  "node": "20.x"
+}
 }
