@@ -17,7 +17,7 @@ export const recipe = pgTable("recipe", {
 	servings: integer("servings"),
 	calories: integer("calories"),
 	link: text("link"),
-	allergies: text("allergies"),
+	allergies: text("allergies").array(),
 });
 
 export const group = pgTable("group", {
