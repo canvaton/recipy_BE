@@ -1,4 +1,4 @@
-import { text, pgTable, uuid} from "drizzle-orm/pg-core";
+import { text, pgTable, uuid, integer} from "drizzle-orm/pg-core";
 
 // * MAIN TABLES
 export const user = pgTable("user", {
@@ -14,8 +14,8 @@ export const recipe = pgTable("recipe", {
 	description: text("description").notNull(),
 	preparationSteps: text("preparationSteps").array().notNull(),
 	diet: text("diet"),
-	servings: text("servings"),
-	calories: text("calories"),
+	servings: integer("servings"),
+	calories: integer("calories"),
 	link: text("link"),
 	allergies: text("allergies"),
 });
