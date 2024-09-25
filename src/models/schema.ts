@@ -1,4 +1,4 @@
-import { text, pgTable, uuid, integer, numeric } from "drizzle-orm/pg-core";
+import { text, pgTable, uuid} from "drizzle-orm/pg-core";
 
 // * MAIN TABLES
 export const user = pgTable("user", {
@@ -10,11 +10,14 @@ export const user = pgTable("user", {
 
 export const recipe = pgTable("recipe", {
 	id: uuid("id").primaryKey().defaultRandom(),
+	name: text("name").notNull(),
 	description: text("description").notNull(),
+	preparationSteps: text("preparationSteps").array().notNull(),
 	diet: text("diet"),
-	servings: integer("servings"),
-	calories: numeric("calories"),
+	servings: text("servings"),
+	calories: text("calories"),
 	link: text("link"),
+	allergies: text("allergies"),
 });
 
 export const group = pgTable("group", {
@@ -43,12 +46,4 @@ export const userRecipes = pgTable("userRecipes", {
 		.references(() => recipe.id, { onDelete: "cascade" }),
 	userId: uuid("userId").references(() => user.id, { onDelete: "cascade" }),
 	groupId: uuid("groupId").references(() => group.id, { onDelete: "cascade" }),
-});
-
-export const recipeAllergies = pgTable("recipeAllergies", {
-	id: uuid("id").primaryKey().defaultRandom(),
-	recipeId: uuid("recipeId")
-		.notNull()
-		.references(() => recipe.id, { onDelete: "cascade" }),
-	allergy: text("allergy").notNull(),
 });

@@ -17,10 +17,13 @@ export const GroupSchema = z.object({
 export const RecipeSchema = z.object({
 	id: z.string().uuid(),
 	name: z.string(),
+	description: z.string(),
+	preparationSteps : z.array(z.string()),
 	diet: z.string().optional().nullable(),
 	servings: z.number().optional().nullable(),
 	calories: z.number().optional().nullable(),
 	link: z.string(),
+	allergies: z.string(),
 });
 
 export const GroupMembersSchema = z.object({
@@ -41,15 +44,10 @@ export const UserRecipeSchema = z
 		path: ["userId", "groupId"],
 	}); // To check if at least one of the fields is filled
 
-export const RecipeAllergySchema = z.object({
-	id: z.string().uuid(),
-	recipeId: z.string().uuid(),
-	allergy: z.string(),
-});
+
 
 export type UserType = z.infer<typeof UserSchema>;
 export type RecipeType = z.infer<typeof RecipeSchema>;
 export type GroupType = z.infer<typeof GroupSchema>;
 export type GroupMembersType = z.infer<typeof GroupMembersSchema>;
 export type UserRecipeType = z.infer<typeof UserRecipeSchema>;
-export type RecipeAllergyType = z.infer<typeof RecipeAllergySchema>;
