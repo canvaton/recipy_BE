@@ -15,15 +15,15 @@ export const GroupSchema = z.object({
 });
 
 export const RecipeSchema = z.object({
-	id: z.string().uuid(),
+	id: z.string(),
 	name: z.string(),
 	description: z.string(),
-	preparationSteps : z.array(z.string()),
-	diet: z.string().optional().nullable(),
-	servings: z.number().optional().nullable(),
-	calories: z.number().optional().nullable(),
-	link: z.string(),
-	allergies: z.string(),
+	preparationSteps: z.array(z.string()).nullable(),
+	diet: z.string().nullable(),
+	servings: z.number().nullable(),
+	calories: z.number().nullable(),
+	link: z.string().nullable(),
+	allergies: z.array(z.string()).nullable(),
 });
 
 export const GroupMembersSchema = z.object({
@@ -43,8 +43,6 @@ export const UserRecipeSchema = z
 		message: "Either userId or groupId must have a value",
 		path: ["userId", "groupId"],
 	}); // To check if at least one of the fields is filled
-
-
 
 export type UserType = z.infer<typeof UserSchema>;
 export type RecipeType = z.infer<typeof RecipeSchema>;
