@@ -5,7 +5,7 @@ class UserControllers {
 	addUser = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const { username } = req.body;
-			const createdUser = await userMethods.insertUser(username);
+			const createdUser = await userMethods.addUser(username);
       res.status(201).send(createdUser)
 		} catch (err) {
 			console.log(err);

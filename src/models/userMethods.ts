@@ -6,7 +6,6 @@ import { eq } from "drizzle-orm";
 class UserMethods {
 	async insertUser(username: string): Promise<UserType | null> {
 		try {
-			console.log("yo");
 			const createdUser = await db
 				.insert(user)
 				.values({

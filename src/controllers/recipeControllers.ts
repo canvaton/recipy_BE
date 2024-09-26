@@ -1,6 +1,7 @@
 import recipeMethods from "../models/recipeMethods";
 import type { Request, Response } from "express";
 
+
 class RecipeControllers {
 	addRecipe = async (req: Request, res: Response): Promise<void> => {
 		try {
