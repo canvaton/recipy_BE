@@ -15,8 +15,8 @@ class UserControllers {
 	deleteUser = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const { userId } = req.params;
-			const createdUser = await userMethods.deleteUser(userId);
-      res.status(204).send(`user: ${createdUser} was deleted`)
+			const deletedUser = await userMethods.deleteUser(userId);
+			res.status(204).send(`Deleted User: ${deletedUser?.username}`)
 		} catch (err) {
 			console.log(err);
 			res.status(500).send("Could not delete User");

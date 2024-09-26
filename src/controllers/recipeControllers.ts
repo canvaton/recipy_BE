@@ -1,20 +1,18 @@
 import recipeMethods from "../models/recipeMethods";
 import type { Request, Response } from "express";
 
-class recipeControllers {
 
-  async addRecipe (req: Request, res : Response)  {
-
-    try {
-      const {recipeLink} = req.body
-      const recipe =  await recipeMethods.addRecipe(recipeLink)
-      res.status(201).send(recipe)
-    } catch(error) {
-      console.log(error)
-      res.status(500).send('Could not create recipe')
-    }
-  
-  }
+class RecipeControllers {
+	addRecipe = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { link } = req.body;
+			const createdRecipe = await recipeMethods.insertRecipe(link);
+			res.status(201).send(createdRecipe);
+		} catch (err) {
+			console.error(err);
+			res.status(500).send("Could not create Recipe");
+		}
+	};
 }
 
-export default new recipeControllers()
+export default new RecipeControllers();

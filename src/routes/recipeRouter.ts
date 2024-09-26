@@ -7,6 +7,6 @@ recipeRouter.get("/", (req, res) => {
 	res.status(200).send("Hello from recipes");
 });
 
-recipeRouter.post("/", recipeControllers.addRecipe)
+recipeRouter.post("/", recipeControllers.addRecipe);
 
 export default recipeRouter;

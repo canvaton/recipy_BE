@@ -1,39 +1,38 @@
-import { db } from "../server"
+import { db } from "../server";
 import { user } from "./schema";
 import type { UserType } from "../types";
 import { eq } from "drizzle-orm";
 
 class UserMethods {
-  async addUser(username: string) : Promise<UserType> {
+	async insertUser(username: string): Promise<UserType | null> {
 		try {
 			const createdUser = await db
 				.insert(user)
 				.values({
-          username: username,
+					username: username,
 				})
-				.returning().then(user => user[0]);
+				.returning()
+				.then((user) => user[0]);
 			return createdUser;
 		} catch (error) {
 			console.error(error);
-			throw new Error("Failed to register user!");
+			return null;
 		}
 	}
 
-
-	async deleteUser(userId: string) {
+	async deleteUser(userId: string): Promise<UserType | null> {
 		try {
 			const deletedUser = await db
 				.delete(user)
 				.where(eq(user.id, userId))
-				.returning().then(user => user[0]);
+				.returning()
+				.then((user) => user[0]);
 			return deletedUser;
 		} catch (error) {
 			console.error(error);
-			throw new Error("Failed to delete user!");
+			return null;
 		}
 	}
-
 }
 
-
-export default new UserMethods()
+export default new UserMethods();
